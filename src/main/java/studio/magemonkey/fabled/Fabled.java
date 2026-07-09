@@ -26,6 +26,7 @@ package studio.magemonkey.fabled;
 
 import com.sucy.skill.SkillAPI;
 import lombok.Getter;
+import lombok.Setter;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
@@ -111,6 +112,10 @@ public class Fabled extends SkillAPI {
 
     @Getter
     private ShieldManager shieldManager;
+
+    @Getter
+    @Setter
+    private static studio.magemonkey.fabled.api.player.SkillTreeHook skillTreeHook;
 
     private MainThread mainThread;
     private BukkitTask manaTask;

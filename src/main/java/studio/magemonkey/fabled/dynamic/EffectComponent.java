@@ -55,7 +55,7 @@ public abstract class EffectComponent {
     private static final String                COUNTS_KEY       = "counts";
     private static final String                TYPE             = "type";
     private static final String                PREVIEW          = "preview";
-    private static       boolean               passed;
+    protected static    boolean               passed;
     /**
      * Child components
      */

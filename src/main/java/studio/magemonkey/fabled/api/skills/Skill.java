@@ -674,10 +674,11 @@ public abstract class Skill implements IconHolder {
         }
 
         // Click string at the bottom
-        if (Fabled.getSettings().isCombosEnabled() && canCast()) {
-            PlayerCombos combos = skillData.getPlayerData().getComboData();
-            if (combos.hasCombo(this)) lore.addAll(Arrays.asList("", combos.getComboString(this)));
-        }
+        // (Removed per request to not show combo on skill icons)
+        // if (Fabled.getSettings().isCombosEnabled() && canCast()) {
+        //     PlayerCombos combos = skillData.getPlayerData().getComboData();
+        //     if (combos.hasCombo(this)) lore.addAll(Arrays.asList("", combos.getComboString(this)));
+        // }
 
         // Binds
         if (Fabled.getSettings().isShowBinds() && skillData.getBind() != null) {

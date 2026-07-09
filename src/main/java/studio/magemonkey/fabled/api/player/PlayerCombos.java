@@ -138,6 +138,22 @@ public class PlayerCombos {
 
         // Cast skill when combo is completed
         if (clickIndex == clicks.length) {
+            // Query the skill tree hook first
+            if (Fabled.getSkillTreeHook() != null) {
+                String comboStr = Fabled.getComboManager().getComboString(java.util.Arrays.asList(clicks));
+                String skillToCast = Fabled.getSkillTreeHook().resolveSkillByCombo(player, comboStr);
+                if (skillToCast != null && !skillToCast.isEmpty()) {
+                    // Hook resolved a skill → inject ENHANCE markers and cast
+                    Fabled.getSkillTreeHook().beforeCast(player.getPlayer(), comboStr);
+                    player.cast(skillToCast);
+                    return;
+                } else if (skillToCast != null) {
+                    // Hook returned "" → tree manages this combo but no node unlocked → BLOCK
+                    return;
+                }
+                // skillToCast is null → tree does not manage this combo → fall through to native
+            }
+
             int id = Fabled.getComboManager().convertCombo(clicks, clickIndex);
             if (skills.containsKey(id)) {
                 PlayerComboFinishEvent event = new PlayerComboFinishEvent(player, id, skills.get(id));

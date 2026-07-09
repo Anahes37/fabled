@@ -98,6 +98,7 @@ public class ComponentRegistry {
         register(new RememberTarget());
         register(new SelfTarget());
         register(new SingleTarget());
+        register(new ChainTarget());
 
         // Conditions
         register(new ActionBarCondition());
@@ -149,6 +150,7 @@ public class ComponentRegistry {
         register(new StatusCondition());
         register(new TimeCondition());
         register(new ToolCondition());
+        register(new TreeNodeCondition());
         register(new ValueCondition());
         register(new ValueTextCondition());
         register(new WaterCondition());
@@ -204,6 +206,8 @@ public class ComponentRegistry {
         register(new ManaMechanic());
         register(new MessageMechanic());
         register(new MineMechanic());
+        register(new ModelEffectMechanic());
+        register(new ModelProjectileMechanic());
         register(new MoneyMechanic());
         register(new MountMechanic());
         register(new MythicMobSkill());

@@ -97,6 +97,15 @@
             <artifactId>mimic-bukkit-api</artifactId>
         </dependency>
 
+        <!-- BetterModel API for 3D model VFX mechanics -->
+        <dependency>
+            <groupId>io.github.toxicity188</groupId>
+            <artifactId>bettermodel-bukkit-api</artifactId>
+            <version>3.2.1</version>
+            <scope>system</scope>
+            <systemPath>D:/cppwork/MCcodes/cres_fabled_test/plugins/bettermodel-3.2.1-SNAPSHOT-505-paper.jar</systemPath>
+        </dependency>
+
         <dependency>
             <groupId>me.libraryaddict.disguises</groupId>
             <artifactId>libsdisguises</artifactId>

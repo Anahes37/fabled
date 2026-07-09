@@ -2,6 +2,7 @@ package studio.magemonkey.fabled.dynamic.condition;
 
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import studio.magemonkey.fabled.Fabled;
 import studio.magemonkey.fabled.dynamic.ComponentType;
 import studio.magemonkey.fabled.dynamic.EffectComponent;
 
@@ -33,7 +34,22 @@ public abstract class ConditionComponent extends EffectComponent {
                 .filter(t -> test(caster, level, t))
                 .collect(Collectors.toList());
 
-        return filtered.size() > 0 && executeChildren(caster, level, filtered, force);
+        if (!filtered.isEmpty()) {
+            Fabled.inst().getLogger().info("[CondDebug] " + getKey() + " PASSED (filtered=" + filtered.size() + "), executing " + children.size() + " children");
+            return executeChildren(caster, level, filtered, force);
+        }
+        // Condition failed — search children for an ElseCondition to handle the fallback
+        passed = false;
+        Fabled.inst().getLogger().info("[CondDebug] " + getKey() + " FAILED, searching " + children.size() + " children for ElseCondition");
+        for (EffectComponent child : children) {
+            Fabled.inst().getLogger().info("[CondDebug]   child: " + child.getKey() + " (" + child.getClass().getSimpleName() + ")");
+            if (child instanceof ElseCondition) {
+                Fabled.inst().getLogger().info("[CondDebug]   -> Found ElseCondition, executing it");
+                return child.execute(caster, level, targets, force);
+            }
+        }
+        Fabled.inst().getLogger().info("[CondDebug] " + getKey() + " no ElseCondition found, returning false");
+        return false;
     }
 
     abstract boolean test(final LivingEntity caster, final int level, final LivingEntity target);
